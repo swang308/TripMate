@@ -9,11 +9,11 @@ Professor: Robert Stewart
 
 ## Screenshots
 
-| Landing | Homepage | AI Recommendations |
+| Landing | Login | Create Account |
 | --- | --- | --- |
 | ![Landing](pics/landing.png) | ![Login](pics/login.png) | ![Create Account](pics/create_account.png) |
 
-| Login | Create Account | Trip Details |
+| Homepage | AI Recommendations | Trip Details |
 | --- | --- | --- |
 | ![Homepage](pics/homepage.png) | ![AI Recommendations](pics/ai_recommendation.png) | ![Trip Details](pics/trip_details.png) |
 
