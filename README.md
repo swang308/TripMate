@@ -1,15 +1,97 @@
-# PRJ666_Group 8 TripMate (Frontend + Backend + MySQL)
+# TripMate
 
-Members: Heng-Min Tsao, Jackey Zhou, Syed Abdullah, Uny Li, Shan-Yun Wang  
+**TripMate** is a full-stack, real-time group trip planner — plan itineraries, split budgets, invite travel companions, and get AI-powered destination recommendations, all in one place.
+
+Built as a group capstone project (PRJ666, Group 8).
+
+Members: Heng-Min Tsao, Jackey Zhou, Syed Abdullah, Uny Li, Shan-Yun Wang
 Professor: Robert Stewart
 
-This repo contains:
+## Screenshots
 
-- `backend/`: Node.js + Express API (MySQL + JWT auth)
-- `frontend/`: React app (CRACO)
-- `docker-compose.yml`: Local MySQL container (and optional frontend container)
+| Landing | Homepage | AI Recommendations |
+| --- | --- | --- |
+| ![Landing](pics/landing.png) | ![Homepage](pics/homepage.png) | ![AI Recommendations](pics/ai_recommendation.png) |
 
-## Run Locally (Step-by-step)
+| Login | Create Account | Trip Details |
+| --- | --- | --- |
+| ![Login](pics/login.png) | ![Create Account](pics/create_account.png) | ![Trip Details](pics/trip_details.png) |
+
+| Profile | Settings | About |
+| --- | --- | --- |
+| ![Profile](pics/profile_page.png) | ![Settings](pics/setting.png) | ![About](pics/about.png) |
+
+## Tech Stack
+
+**Frontend**
+- React 19 + React Router 7
+- CRACO (custom CRA config) + Tailwind CSS
+- Radix UI primitives, `lucide-react` icons, `sonner` toasts
+- `@dnd-kit` (drag-and-drop itinerary ordering)
+- `react-leaflet` / Leaflet (interactive maps)
+- `recharts` (budget charts), `react-hook-form` + `zod` (forms/validation)
+- `socket.io-client` (real-time updates)
+
+**Backend**
+- Node.js + Express 5
+- MySQL (via `mysql2`) with a `docker-compose` MySQL container for local dev
+- JWT authentication (`jsonwebtoken`) + `bcrypt` password hashing
+- Socket.IO (real-time itinerary/budget/edit-lock events)
+- Feature-based modular architecture (see [Backend Architecture](#backend-architecture))
+
+**Testing**
+- Node.js built-in test runner (`node:test`) for backend security/authorization tests
+
+## Features
+
+- **Auth**: register, login, password reset/recovery, JWT-protected sessions
+- **Trips**: create, edit, delete trips; role-based access (Owner / Editor / Viewer)
+- **Itinerary**: add/edit/delete/reorder day-by-day itinerary items (drag-and-drop)
+- **Budget**: track and split trip expenses among members
+- **Groups**: invite members, manage roles, remove members
+- **AI Assistant**: chat-based destination recommendations with ratings, via the AI popup
+- **Comments**: per-trip discussion thread
+- **Real-time collaboration**: live edit locks and itinerary/budget sync across members via Socket.IO
+- **Interactive map**: visualize visited/planned locations with Leaflet
+
+## How to Use
+
+Once both servers are running (see [Getting Started](#getting-started) — frontend on `:3000`, backend on `:5050`):
+
+1. **Register / Login** — go to `http://localhost:3000`, create an account (or log in). Password reset is available from the login page.
+2. **Create a trip** — from the Home page, click "New Trip" and fill in destination, dates, and details.
+3. **Build the itinerary** — open a trip, add day-by-day items, and drag-and-drop to reorder.
+4. **Manage the budget** — track expenses and see how costs are split across members.
+5. **Invite your group** — from the trip's Group tab, invite collaborators by email and assign roles (Owner / Editor / Viewer).
+6. **Ask the AI assistant** — open the AI popup on a trip to chat and get destination/activity recommendations, then rate suggestions.
+7. **Discuss** — leave comments on a trip for group discussion.
+8. **Collaborate live** — edits made by one member (itinerary, budget) sync in real time to everyone else viewing the trip.
+
+Role permissions at a glance:
+
+| Action | Owner | Editor | Viewer |
+| --- | ---: | ---: | ---: |
+| View trip data | Yes | Yes | Yes |
+| Edit itinerary / budget | Yes | Yes | No |
+| Manage invitations / roles / remove members | Yes | No | No |
+| Delete the trip | Yes | No | No |
+
+## API Overview
+
+All routes require a `Bearer` JWT (via `Authorization` header) unless noted otherwise.
+
+| Module | Endpoints |
+| --- | --- |
+| Health | `GET /`, `GET /api/health` |
+| Users | registration, login, recovery, profile |
+| Trips | `GET/POST /api/trips`, `GET/PUT/DELETE /api/trips/:tripId` |
+| Itinerary | `GET /api/trips/:tripId/itinerary`, `POST` item, `PUT /api/itinerary-items/:itemId`, `PUT /api/itinerary-days/:id/items/order`, `DELETE /api/itinerary-items/:itemId` |
+| Budget | `GET/PUT /api/trips/:tripId/budget` |
+| Groups | `GET /api/trips/:tripId/group`, `POST/DELETE /api/trips/:tripId/invitations`, `PATCH/DELETE /api/trips/:tripId/members/:memberUserId`, `GET /api/invitations`, `POST /api/invitations/:id/respond` |
+| AI Recommendations | `GET/DELETE /api/trips/:tripId/ai-chat`, `POST /api/trips/:tripId/recommendations`, `POST /api/recommendations/:id/rating` |
+| Comments | `GET/POST /api/trips/:tripId/comments`, `PUT/DELETE /api/comments/:commentId` |
+
+## Getting Started
 
 ### Prerequisites
 
@@ -18,7 +100,7 @@ This repo contains:
 
 ### Option A (Recommended): MySQL via Docker + Frontend/Backend via Node
 
-### 0) Start MySQL (Docker Compose)
+#### 0) Start MySQL (Docker Compose)
 
 From repo root:
 
@@ -55,7 +137,7 @@ Do not use `docker compose up -d` for Option A. That starts every service in
 `docker-compose.yml`, including the Docker frontend on port `3000`. For local
 frontend development, only start the `mysql` service with Docker.
 
-### 1) Configure Backend Environment (.env)
+#### 1) Configure Backend Environment (.env)
 
 1) Create `backend/.env`:
 
@@ -75,7 +157,7 @@ copy backend\.env.example backend\.env
 
 - `DB_PASSWORD=` (use the same value as `MYSQL_PASSWORD` from `.env.mysql`)
 
-### 2) Generate a JWT Secret
+#### 2) Generate a JWT Secret
 
 Generate a secret:
 
@@ -87,7 +169,7 @@ Copy the output into `backend/.env`:
 
 - `JWT_SECRET=...`
 
-### 3) Install & Start Backend API
+#### 3) Install & Start Backend API
 
 In a new terminal:
 
@@ -104,7 +186,7 @@ Quick checks:
 - `http://localhost:5050/`
 - `http://localhost:5050/api/health` (verifies DB connection)
 
-### 4) Install & Start Frontend
+#### 4) Install & Start Frontend
 
 In another terminal:
 
@@ -237,6 +319,16 @@ backend/
 │  ├─ services/                      # Audit, notification and actor services
 │  └─ utils/                         # Shared date utilities
 └─ test/                             # Node.js security and authorization tests
+```
+
+Frontend structure (`frontend/src/`):
+
+```text
+frontend/src/
+├─ pages/          # Landing, Login, Register, Home, CreateTrip, Itinerary,
+│                  # Budget, Group, Profile, Settings, Account Recovery, etc.
+├─ components/     # AppHeader, TripCard, VisitedMap, AI Assist popup, etc.
+├─ hooks/ · lib/ · utils/
 ```
 
 `src/app.js` can be imported without starting the HTTP listener. This keeps
