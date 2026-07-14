@@ -11,15 +11,23 @@ Professor: Robert Stewart
 
 | Landing | Homepage | AI Recommendations |
 | --- | --- | --- |
-| ![Landing](pics/landing.png) | ![Homepage](pics/homepage.png) | ![AI Recommendations](pics/ai_recommendation.png) |
+| ![Landing](pics/landing.png) | ![Login](pics/login.png) | ![Create Account](pics/create_account.png) |
 
 | Login | Create Account | Trip Details |
 | --- | --- | --- |
-| ![Login](pics/login.png) | ![Create Account](pics/create_account.png) | ![Trip Details](pics/trip_details.png) |
+| ![Homepage](pics/homepage.png) | ![AI Recommendations](pics/ai_recommendation.png) | ![Trip Details](pics/trip_details.png) |
 
 | Profile | Settings | About |
 | --- | --- | --- |
 | ![Profile](pics/profile_page.png) | ![Settings](pics/setting.png) | ![About](pics/about.png) |
+
+| Add Trip | Budget | Group Management |
+| --- | --- | --- |
+| ![Add Trip](pics/add_trip.png) | ![Budget](pics/budget.png) | ![Group Management](pics/group_management.png) |
+
+| Contact | Add AI Recommendation | Accessibility Mode |
+| --- | --- | --- |
+| ![Contact](pics/contact.png) | ![Add AI Recommendation](pics/add_ai_recommendation.png) | ![Accessibility Mode](pics/after_applied_accessibility.png) |
 
 ## Tech Stack
 
