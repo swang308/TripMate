@@ -1,0 +1,23 @@
+{
+  "name": "tripmate-backend",
+  "private": true,
+  "version": "0.1.0",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/*.test.js",
+    "generate:jwt-secret": "node scripts/generate-jwt-secret.js",
+    "check:env": "node scripts/check-env.js",
+    "check:credits": "node scripts/check-credits.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.6.2",
+    "mysql2": "^3.22.3",
+    "socket.io": "^4.8.3"
+  }
+}

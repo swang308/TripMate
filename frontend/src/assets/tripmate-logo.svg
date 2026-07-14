@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="72" viewBox="0 0 280 72" role="img" aria-label="TripMate">
+  <g fill="none" fill-rule="evenodd">
+    <!-- Pin (simple filled map-pin shape) -->
+    <path
+      d="M32 6c-11.046 0-20 8.954-20 20 0 14.2 15.716 31.658 19.004 35.175a1.5 1.5 0 0 0 2.192 0C36.284 57.658 52 40.2 52 26 52 14.954 43.046 6 32 6Z"
+      fill="#ec4899"
+    />
+    <circle cx="32" cy="26" r="7" fill="#ffffff" opacity="0.35"/>
+
+    <!-- Wordmark -->
+    <text
+      x="66"
+      y="44"
+      font-family="Comic Sans MS, cursive"
+      font-size="40"
+      font-weight="800"
+      fill="#ec4899"
+      letter-spacing="0.2"
+    >TripMate</text>
+  </g>
+</svg>
+
