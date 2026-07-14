@@ -25,9 +25,9 @@ Professor: Robert Stewart
 | --- | --- | --- |
 | ![Add Trip](pics/add_trip.png) | ![Budget](pics/budget.png) | ![Group Management](pics/group_management.png) |
 
-| Contact | Add AI Recommendation | Accessibility Mode |
-| --- | --- | --- |
-| ![Contact](pics/contact.png) | ![Add AI Recommendation](pics/add_ai_recommendation.png) | ![Accessibility Mode](pics/after_applied_accessibility.png) |
+| Contact | Accessibility Mode |
+| --- | --- |
+| ![Contact](pics/contact.png) | ![Accessibility Mode](pics/after_applied_accessibility.png) |
 
 ## Tech Stack
 
